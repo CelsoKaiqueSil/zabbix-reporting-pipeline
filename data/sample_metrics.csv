@@ -1,0 +1,15 @@
+client,host,item_name,timestamp,value
+Cliente A,edge-a,Processor: CPU utilization,2026-07-01T09:00:00Z,32
+Cliente A,edge-a,Processor: CPU utilization,2026-07-01T10:00:00Z,81
+Cliente A,edge-a,Processor: CPU utilization,2026-07-01T11:00:00Z,81
+Cliente A,edge-a,Processor: Memory utilization,2026-07-01T09:00:00Z,54
+Cliente A,edge-a,Processor: Memory utilization,2026-07-01T10:00:00Z,68
+Cliente A,edge-a,Interface WAN: Bits received,2026-07-01T09:00:00Z,1600000
+Cliente A,edge-a,Interface WAN: Bits received,2026-07-01T10:00:00Z,4100000
+Cliente A,edge-a,Interface WAN: Bits sent,2026-07-01T09:00:00Z,900000
+Cliente B,edge-b,CPU load,2026-07-01T09:00:00Z,25
+Cliente B,edge-b,CPU load,2026-07-01T10:00:00Z,73
+Cliente B,edge-b,Memory used percentage,2026-07-01T09:00:00Z,61
+Cliente B,edge-b,Memory used percentage,2026-07-01T10:00:00Z,77
+Cliente B,edge-b,Interface MPLS: Traffic inbound,2026-07-01T09:00:00Z,2200000
+Cliente B,edge-b,Interface MPLS: Traffic inbound,2026-07-01T10:00:00Z,3600000
