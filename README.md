@@ -1,5 +1,20 @@
 # Zabbix Reporting Pipeline
 
+[Baixar Excel sintetico de exemplo](docs/examples/zabbix_report.xlsx) · [Historico de mudancas](CHANGELOG.md)
+
+![Previa de uma serie sintetica e seus picos](docs/images/preview.png)
+
+**Problema:** consolidar metricas sem perder evidencia dos picos nem ocultar erros de entrada.
+
+- 14 amostras sinteticas, 2 hosts e 7 series na entrada padrao.
+- Pico 81 no item de CPU de edge-a: primeira ocorrencia 10:00 UTC, duas amostras no pico.
+- Descartes reconciliados na aba Rejeitados e contados em Controle.
+
+A imagem e uma previa Python dos dados, nao captura de um ambiente Zabbix.
+Agregacoes separam cliente, item e unidade: bytes, bits, percentuais e unidades
+desconhecidas nao sao somados numa mesma media. A coluna opcional `unit` declara a
+unidade; sem ela o valor fica `unspecified`, nunca presumido.
+
 [![CI](https://github.com/CelsoKaiqueSil/zabbix-reporting-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/CelsoKaiqueSil/zabbix-reporting-pipeline/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](pyproject.toml)
 [![Pandas](https://img.shields.io/badge/Pandas-ETL-150458?logo=pandas&logoColor=white)](src/zabbix_reporting/pipeline.py)
@@ -40,13 +55,27 @@ Assim, qualquer pessoa pode executar o pipeline sem acesso a um ambiente Zabbix.
 
 ```bash
 python -m venv .venv
+source .venv/bin/activate  # Linux/macOS
 python -m pip install -e ".[dev]"
 zabbix-report --input data/sample_metrics.csv --output output/zabbix_report.xlsx
 pytest -q
 ```
 
 O arquivo gerado contém as páginas `Resumo`, `Picos`, `CPU`, `Memória`,
-`Tráfego` e `Controle`.
+`Tráfego`, `Controle` e `Rejeitados`.
+
+No Windows PowerShell: `.\.venv\Scripts\Activate.ps1` em lugar de `source`.
+Sem ativacao: `.\.venv\Scripts\python.exe -m zabbix_reporting.pipeline`.
+Para testar, use o mesmo Python com `-m pytest`; nao mude politicas globais.
+`python scripts/validate_exports.py` confere o XLSX e `python scripts/preview.py`
+regenera a imagem. Entrada vazia ainda gera controle e abas com cabecalho.
+
+## Limites da demonstracao
+
+A CLI comeca no CSV, nao executa uma coleta real. A allowlist e uma protecao de
+integracao, nao evidencia de acesso a Zabbix. Datas e numeros invalidos ou infinitos
+sao rejeitados com motivo; nenhuma credencial e necessaria. Medias nao sao ponderadas
+por intervalo de amostragem; series irregulares exigem outro metodo antes de uso real.
 
 ## Segurança
 
