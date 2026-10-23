@@ -1,5 +1,7 @@
 # Zabbix Reporting Pipeline
 
+![Zabbix Reporting Pipeline: capa ilustrativa de dados e automação](docs/images/cover.png)
+
 [![CI](https://github.com/CelsoKaiqueSil/zabbix-reporting-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/CelsoKaiqueSil/zabbix-reporting-pipeline/actions/workflows/ci.yml)
 
 **Métricas de monitoramento com contexto e rastreabilidade.** Classificação de
