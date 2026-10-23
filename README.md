@@ -1,30 +1,23 @@
 # Zabbix Reporting Pipeline
 
-[Baixar Excel sintetico de exemplo](docs/examples/zabbix_report.xlsx) · [Historico de mudancas](CHANGELOG.md)
-
-![Previa de uma serie sintetica e seus picos](docs/images/preview.png)
-
-**Problema:** consolidar metricas sem perder evidencia dos picos nem ocultar erros de entrada.
-
-- 14 amostras sinteticas, 2 hosts e 7 series na entrada padrao.
-- Pico 81 no item de CPU de edge-a: primeira ocorrencia 10:00 UTC, duas amostras no pico.
-- Descartes reconciliados na aba Rejeitados e contados em Controle.
-
-A imagem e uma previa Python dos dados, nao captura de um ambiente Zabbix.
-Agregacoes separam cliente, item e unidade: bytes, bits, percentuais e unidades
-desconhecidas nao sao somados numa mesma media. A coluna opcional `unit` declara a
-unidade; sem ela o valor fica `unspecified`, nunca presumido.
-
 [![CI](https://github.com/CelsoKaiqueSil/zabbix-reporting-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/CelsoKaiqueSil/zabbix-reporting-pipeline/actions/workflows/ci.yml)
-[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](pyproject.toml)
-[![Pandas](https://img.shields.io/badge/Pandas-ETL-150458?logo=pandas&logoColor=white)](src/zabbix_reporting/pipeline.py)
-[![Excel](https://img.shields.io/badge/Excel-relatório-217346?logo=microsoftexcel&logoColor=white)](src/zabbix_reporting/pipeline.py)
-[![Safety](https://img.shields.io/badge/API-somente%20leitura-16845C)](src/zabbix_reporting/readonly.py)
-[![Data](https://img.shields.io/badge/dados-100%25%20sintéticos-14804A)](data/sample_metrics.csv)
 
-Pipeline demonstrativo para transformar métricas de monitoramento em relatórios
-Excel rastreáveis. A edição pública utiliza somente dados sintéticos e mantém uma
-lista explícita de métodos permitidos para impedir chamadas de escrita na API.
+**Métricas de monitoramento com contexto e rastreabilidade.** Classificação de
+CPU, memória e tráfego, análise de picos e geração de relatórios Excel.
+
+[Baixar Excel de exemplo](docs/examples/zabbix_report.xlsx) ·
+[Executar](#executar) ·
+[Proteção somente leitura](src/zabbix_reporting/readonly.py) ·
+[Limites da demonstração](#limites-da-demonstracao)
+
+## Resultado em uma leitura
+
+![Série sintética com identificação dos picos](docs/images/preview.png)
+
+<sub>Prévia Python, não captura do Zabbix. Entrada: 14 amostras, 2 hosts e 7 séries. CPU de edge-a: pico 81 às 10:00 UTC, com duas ocorrências. A unidade não é presumida.</sub>
+
+A demonstração começa em CSV e funciona sem credenciais. A coluna opcional
+`unit` declara a unidade; quando ausente, permanece `unspecified`.
 
 ## O que o projeto demonstra
 
