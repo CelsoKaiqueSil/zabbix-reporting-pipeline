@@ -34,6 +34,7 @@ def test_report_contains_expected_sheets(tmp_path: Path) -> None:
         "Memória",
         "Tráfego",
         "Controle",
+        "Rejeitados",
     }
 
 
